@@ -1,5 +1,5 @@
 # action.yaml
-name: 'Custom GitHub Action'
+name: 'Run Jenkins Job Python API'
 description: 'A GitHub Action that takes an input and returns the square of the number'
 inputs:
   jenkins_user:
