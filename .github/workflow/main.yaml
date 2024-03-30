@@ -1,0 +1,22 @@
+on: [push]
+
+jobs:
+  get-num-square:
+    runs-on: ubuntu-latest
+    name: Returns the number job status
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Job
+        id: run_job
+        uses: ./ # Uses an action in the root directory
+        # or use a released GitHub Action
+        # uses: shipyard/github-action/fetch-shipyard-env@1.0.0
+        with:
+          jenkins_url: "https://jenkins-prod-microcosm.internalk.com"
+          jenkins_user: ${{ secrets.JENKINS_USER }}
+          jenkins_token: ${{ secrets.JENKINS_TOKEN }}
+          job_name: "foobar"
+          parameters: '{"Branch_Name":"Test","PR_NUMBER":"12345"}'
+      - name: Print the status
+        run: echo "${{ steps.run_job.outputs.status }}"
