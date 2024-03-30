@@ -5,12 +5,12 @@ import json
 
 class JenkinsJob:
     def __init__(self):
-        self._jenkins_url = os.getenv('JENKINS_URL')
-        self._jenkins_user = os.getenv('JENKINS_USER')
-        self._jenkins_password = os.getenv('JENKINS_TOKEN')
-        self._job_name = os.getenv('JOB_NAME')
+        self._jenkins_url = os.getenv('INPUT_JENKINS_URL')
+        self._jenkins_user = os.getenv('INPUT_JENKINS_USER')
+        self._jenkins_password = os.getenv('INPUT_JENKINS_TOKEN')
+        self._job_name = os.getenv('INPUT_JOB_NAME')
         self._parameters = self._get_job_params_in_dict()
-        self._wait_for_build_result = bool(os.getenv('WAIT'))
+        self._wait_for_build_result = bool(os.getenv('INPUT_WAIT'))
 
         self._jenkins_connection = jenkins.Jenkins(url= self._jenkins_url,
                                                    username=self._jenkins_user,
@@ -18,8 +18,8 @@ class JenkinsJob:
     
 
     def _get_job_params_in_dict():
-        if os.getenv('JOB_PARAMETERS') and os.getenv('JOB_PARAMETERS') != '' :
-            return json.loads(os.getenv('JOB_PARAMETERS'))
+        if os.getenv('INPUT_PARAMETERS') and os.getenv('INPUT_PARAMETERS') != '' :
+            return json.loads(os.getenv('INPUT_PARAMETERS'))
         else:
             return {}
         
