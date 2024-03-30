@@ -1,0 +1,50 @@
+# action.yaml
+name: 'Custom GitHub Action'
+description: 'A GitHub Action that takes an input and returns the square of the number'
+inputs:
+  jenkins_user:
+    description: 'Enter a Jenkins User'
+    required: true
+  jenkins_token:
+    description: 'Enter a valid Jenkins Token'
+    required: true
+  jenkins_url:
+    description: 'Enter a Jenkins Host URL to connect to'
+    required: true
+  job_name:
+    description: 'Enter the Jenkins Job Name to run'
+    required: true
+  parameters:
+    description: 'Enter a Jenkins job parameters in JSON format'
+    required: false
+    default: ''
+  wait: 
+    description: 'Boolean parameter, if you want to wait for the job to finish. Has to be: `"true"` or `"false"` with quotes'
+    required: false
+    default: 'false'
+outputs:
+  job-status:
+    description: 'Status of the job can be: `SUCCESS`, `UNSTABLE` or `FAILURE`. If you chose not to wait for status, it will return it as `TRIGGERED`. If some error occured, it will return `ERROR_OCCURRED`'
+    # need to specify the extra `value` field for `composite` actions
+    value: ${{ steps.run-job.outputs.job-status }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+      shell: bash
+    - name: Run the Jenkins Job
+      id: run-job
+      run: python src/run_jenkins_job.py
+      shell: bash
+      env:
+        JENKINS_USER: ${{ github.jenkins_user }}
+        JENKINS_TOKEN: ${{ github.jenkins_token }}
+        JENKINS_URL: ${{ github.jenkins_url }}
+        WAIT: ${{ github.wait }}
+        JOB_PARAMETERS: ${{ github.parameters }}
+        JOB_NAME: ${{ github.job_name }}
