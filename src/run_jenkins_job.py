@@ -41,7 +41,7 @@ class JenkinsJob:
             return True
         raise ValueError('Not correct Build Queue status')
 
-    @retry(ValueError, DELAY=JOB_RUN_DELAY_INTERVAL, tries=JOB_RUN_TRIES)
+    @retry(ValueError, delay=JOB_RUN_DELAY_INTERVAL, tries=JOB_RUN_TRIES)
     def _get_build_result(self, build_number):
         build_info = self._jenkins_connection.get_build_info(name=self._job_name, number=build_number)
         if not build_info['building']:
