@@ -26,30 +26,30 @@ outputs:
   job-status:
     description: 'Status of the job can be: `SUCCESS`, `UNSTABLE` or `FAILURE`. If you chose not to wait for status, it will return it as `TRIGGERED`. If some error occured, it will return `ERROR_OCCURRED`'
     # need to specify the extra `value` field for `composite` actions
-    # value: ${{ steps.run-job.outputs.job-status }}
+    value: ${{ steps.run-job.outputs.job-status }}
 runs:
-  # using: 'composite'
-  # steps:
-  #   - name: Install Python
-  #     uses: actions/setup-python@v4
-  #     with:
-  #       python-version: '3.9'  
-  #   - name: Install Dependencies
-  #     run: pip install -r requirements.txt
-  #     shell: bash
-  #   - name: Run the Jenkins Job
-  #     id: run-job
-  #     run: python src/run_jenkins_job.py
-  #     shell: bash
-  #     env:
-  #       JENKINS_USER: ${{ github.jenkins_user }}
-  #       JENKINS_TOKEN: ${{ github.jenkins_token }}
-  #       JENKINS_URL: ${{ github.jenkins_url }}
-  #       WAIT: ${{ github.wait }}
-  #       JOB_PARAMETERS: ${{ github.parameters }}
-  #       JOB_NAME: ${{ github.job_name }}
-  using: "docker"
-  image: "Dockerfile"
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'  
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+      shell: bash
+    - name: Run the Jenkins Job
+      id: run-job
+      run: python src/run_jenkins_job.py
+      shell: bash
+      env:
+        INPUT_JENKINS_USER: ${{ github.jenkins_user }}
+        INPUT_JENKINS_TOKEN: ${{ github.jenkins_token }}
+        INPUT_JENKINS_URL: ${{ github.jenkins_url }}
+        INPUT_WAIT: ${{ github.wait }}
+        INPUT_JOB_PARAMETERS: ${{ github.parameters }}
+        INPUT_JOB_NAME: ${{ github.job_name }}
+  # using: "docker"
+  # image: "Dockerfile"
   # args:
   #   - ${{ github.jenkins_user }}
   #   - ${{ github.jenkins_token }}
