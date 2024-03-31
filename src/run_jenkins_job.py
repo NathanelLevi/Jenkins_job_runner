@@ -71,10 +71,7 @@ class JenkinsJob:
             self._set_output(staus_value='ERROR_OCCURRED')
 
 def main():
-    for name, value in os.environ.items():
-        print("{0}: {1}".format(name, value))
     JenkinsJob().trigger_jenkins_job()
-    print(os.getenv('GITHUB_OUTPUT'))
 
 if __name__ == "__main__":
     main()
