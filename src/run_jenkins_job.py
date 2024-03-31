@@ -1,5 +1,5 @@
 import jenkins
-import retry
+from retry import retry
 import os
 import json
 
