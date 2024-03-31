@@ -18,8 +18,8 @@ class JenkinsJob:
     
 
     def _get_job_params_in_dict(self):
-        if os.getenv('INPUT_PARAMETERS') and os.getenv('INPUT_PARAMETERS') != '' :
-            return json.loads(os.getenv('INPUT_PARAMETERS'))
+        if os.getenv('INPUT_JOB_PARAMETERS') and os.getenv('INPUT_JOB_PARAMETERS') != '' :
+            return json.loads(os.getenv('INPUT_JOB_PARAMETERS'))
         else:
             return {}
         
@@ -45,7 +45,10 @@ class JenkinsJob:
             raise ValueError('Not correct Build Info status')
         
     def _build_jenkins_job(self):
+        try:    
             return self._jenkins_connection.build_job(name=self._job_name, parameters=self._parameters)
+        except Exception as e:
+            raise e
 
     def trigger_jenkins_job(self):
         try:
