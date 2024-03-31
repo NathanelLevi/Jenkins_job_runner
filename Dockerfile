@@ -10,4 +10,4 @@ FROM python:3.9
 COPY --from=builder /app /app
 WORKDIR /app
 ENV PYTHONPATH /app
-CMD ["python /src/run_jenkins_job.py"]
+CMD ["python /app/src/run_jenkins_job.py"]
