@@ -52,7 +52,7 @@ class JenkinsJob:
 
     def _set_output(self, staus_value):
         with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-            print(f'status={staus_value}', file=fh)
+            print(f'job-status={staus_value}', file=fh)
     
     def trigger_jenkins_job(self):
         try:
@@ -66,7 +66,7 @@ class JenkinsJob:
             else:
                 self._set_output(staus_value='TRIGGERED')
         except Exception as e:
-            print(str(e))
+            print(f"::error {str(e)}")
             self._set_output(staus_value='ERROR_OCCURRED')
 
 def main():

@@ -19,4 +19,4 @@ jobs:
           job_name: "preview-ui-app-test-dev-pull-request"
           parameters: '{"Branch_Name":"Test","PR_NUMBER":"12345"}'
       - name: Print the status
-        run: echo "${{ steps.run_job.outputs.status }}"
+        run: echo "${{ steps.run_job.outputs.job-status }}"
