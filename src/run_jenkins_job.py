@@ -60,8 +60,8 @@ class JenkinsJob:
             build_number = self._wait_for_build_number(queued_item_id=queued_item_id)
             build_url = f'{self._jenkins_url}/job/{self._job_name}/{build_number}/'
             print(f'Jenkins job triggered: {build_url}')
-            print(f"wait? : {self._wait_for_build_result}")
-            if self._wait_for_build_result:
+            print(f"wait? : {bool(self._wait_for_build_result)}")
+            if bool(self._wait_for_build_result):
                 result = self._get_build_result(build_number=build_number)
                 self._set_output(staus_value=result)
             else:
