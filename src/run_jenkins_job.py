@@ -17,7 +17,7 @@ class JenkinsJob:
                                                    password=self._jenkins_password)
     
 
-    def _get_job_params_in_dict():
+    def _get_job_params_in_dict(s):
         if os.getenv('INPUT_PARAMETERS') and os.getenv('INPUT_PARAMETERS') != '' :
             return json.loads(os.getenv('INPUT_PARAMETERS'))
         else:
