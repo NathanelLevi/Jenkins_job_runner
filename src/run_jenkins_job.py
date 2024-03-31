@@ -47,7 +47,7 @@ class JenkinsJob:
     def _build_jenkins_job(self):
             return self.jenkins_connection.build_job(name=self._job_name, parameters=self._parameters)
 
-    def _trigger_jenkins_job(self):
+    def trigger_jenkins_job(self):
         try:
             queued_item_id = self._build_jenkins_job()
             build_number = self._wait_for_build_number(queued_item_id=queued_item_id)
@@ -61,3 +61,9 @@ class JenkinsJob:
         except Exception as e:
             print(str(e))
             print(f"::set-output name=result::ERROR_OCCURRED")
+
+def main():
+    JenkinsJob().trigger_jenkins_job()
+
+if __name__ == "__main__":
+    main()
