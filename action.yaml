@@ -42,12 +42,12 @@ runs:
       run: python3 src/run_jenkins_job.py
       shell: bash
       env:
-        INPUT_JENKINS_USER: ${{ github.jenkins_user }}
-        INPUT_JENKINS_TOKEN: ${{ github.jenkins_token }}
-        INPUT_JENKINS_URL: ${{ github.jenkins_url }}
-        INPUT_WAIT: ${{ github.wait }}
-        INPUT_JOB_PARAMETERS: ${{ github.parameters }}
-        INPUT_JOB_NAME: ${{ github.job_name }}
+        INPUT_JENKINS_USER: ${{ inputs.jenkins_user }}
+        INPUT_JENKINS_TOKEN: ${{ inputs.jenkins_token }}
+        INPUT_JENKINS_URL: ${{ inputs.jenkins_url }}
+        INPUT_WAIT: ${{ inputs.wait }}
+        INPUT_JOB_PARAMETERS: ${{ inputs.parameters }}
+        INPUT_JOB_NAME: ${{ inputs.job_name }}
   # using: "docker"
   # image: "Dockerfile"
   # args:
