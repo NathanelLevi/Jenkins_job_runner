@@ -2,6 +2,7 @@ import jenkins
 from retry import retry
 import os
 import json
+import sys
 
 class JenkinsJob:
     def __init__(self):
@@ -69,6 +70,7 @@ class JenkinsJob:
         except Exception as e:
             print(f"::error {str(e)}")
             self._set_output(staus_value='ERROR_OCCURRED')
+            sys.exit(1)
 
 def main():
     JenkinsJob().trigger_jenkins_job()
