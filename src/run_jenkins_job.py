@@ -73,6 +73,7 @@ def main():
     for name, value in os.environ.items():
         print("{0}: {1}".format(name, value))
     JenkinsJob().trigger_jenkins_job()
+    print(os.getenv(''))
 
 if __name__ == "__main__":
     main()
