@@ -14,7 +14,7 @@ inputs:
   job_name:
     description: 'Enter the Jenkins Job Name to run'
     required: true
-  parameters:
+  job_parameters:
     description: 'Enter a Jenkins job parameters in JSON format'
     required: false
     default: ''
@@ -46,7 +46,7 @@ runs:
     #     INPUT_JENKINS_TOKEN: ${{ inputs.jenkins_token }}
     #     INPUT_JENKINS_URL: ${{ inputs.jenkins_url }}
     #     INPUT_WAIT: ${{ inputs.wait }}
-    #     INPUT_JOB_PARAMETERS: ${{ inputs.parameters }}
+    #     INPUT_JOB_PARAMETERS: ${{ inputs.job_parameters }}
     #     INPUT_JOB_NAME: ${{ inputs.job_name }}
   using: "docker"
   image: "Dockerfile"
