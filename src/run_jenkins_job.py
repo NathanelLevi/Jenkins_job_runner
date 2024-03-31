@@ -10,7 +10,7 @@ class JenkinsJob:
         self._jenkins_password = os.getenv('INPUT_JENKINS_TOKEN')
         self._job_name = os.getenv('INPUT_JOB_NAME')
         self._parameters = self._get_job_params_in_dict()
-        self._wait_for_build_result = bool(os.getenv('INPUT_WAIT'))
+        self._wait_for_build_result = json.loads(os.getenv('INPUT_WAIT').lower())
 
         self._jenkins_connection = jenkins.Jenkins(url= self._jenkins_url,
                                                    username=self._jenkins_user,
