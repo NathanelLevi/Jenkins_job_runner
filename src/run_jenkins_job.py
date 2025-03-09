@@ -47,6 +47,7 @@ class JenkinsJob:
         if not build_info['building']:
             return build_info['result']
         else:
+            print(build_info)
             raise ValueError('Not correct Build Info status')
         
     def _build_jenkins_job(self):
